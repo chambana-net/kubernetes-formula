@@ -1,0 +1,14 @@
+[Unit]
+Description=Kubernetes API Server
+Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+
+[Service]
+EnvironmentFile=-/etc/kubernetes/kube-apiserver.conf
+User=kube
+ExecStart=/opt/kubernetes/sbin/kube-apiserver \
+      $KUBE_APISERVER_OPTS
+Restart=on-failure
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target

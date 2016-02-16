@@ -1,0 +1,17 @@
+[Unit]
+Description=Kubernetes Kubelet Server
+Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+After=etcd.service
+After=docker.service
+Wants=etcd.service
+Wants=docker.service
+
+[Service]
+WorkingDirectory=/var/lib/kubelet
+EnvironmentFile=-/etc/kubernetes/kubelet.conf
+ExecStart=/opt/kubernetes/bin/kubelet \
+	    $KUBELET_OPTS
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
